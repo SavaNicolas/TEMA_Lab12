@@ -83,7 +83,39 @@ class Controller:
             self._view.update_page()
 
 
-
+#######parte 2
 
     def handle_path(self, e):
-        pass
+        # pulisco risultati
+        self._view.txtOut3.controls.clear()
+        ##num archi deve essere inserito, deve essere > 2 e devo convertirlo in intero
+        N_archi= self._view.txtN.value
+        # controlli
+        if N_archi is None:
+            self._view.txtOut3.controls.clear()
+            self._view.txtOut3.controls.append(ft.Text("seleziona un valore"))
+            self._view.update_page()
+            return
+
+        # converto in intero
+        try:
+            N_archi = int(N_archi)
+        except ValueError:
+            self._view.txtOut3.controls.clear()
+            self._view.txtOut3.controls.append(ft.Text("data non valida"))
+            self._view.update_page()
+            return
+
+        #chiamo ricorsione
+        path,max=self._model.getCamminoOttimo(N_archi)
+
+        self._view.txtOut3.controls.append(ft.Text(f"il percorso ottimo ha peso: {max}"))
+        self._view.update_page()
+
+        for p in path: #sistema questo in base a quello che ti dice il testo
+            self._view.txtOut3.controls.append(ft.Text(p))
+        self._view.update_page()
+
+
+
+
