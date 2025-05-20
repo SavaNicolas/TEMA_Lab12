@@ -34,15 +34,15 @@ class View(ft.UserControl):
         self._page.controls.append(self._title)
 
         #ROW with some controls
-        self.ddyear = ft.Dropdown(label="Anno")
-        self.ddcountry= ft.Dropdown(label="Nazione")
+        self.ddyear = ft.Dropdown(label="Anno", options=[ft.dropdown.Option("2015"),ft.dropdown.Option("2016"),ft.dropdown.Option("2017"),ft.dropdown.Option("2018")])
+        self.ddcountry= ft.Dropdown(label="Nazione", options=[])
+        self._controller.fillDD()
 
         self.btn_graph = ft.ElevatedButton(text="Crea Grafo", on_click=self._controller.handle_graph)
 
         row1 = ft.Row([self.ddyear, self.ddcountry, self.btn_graph],
                       alignment=ft.MainAxisAlignment.CENTER)
         self._page.controls.append(row1)
-        self._controller.fillDD()
 
         # List View where the reply is printed
         self.txt_result = ft.ListView(expand=0, spacing=5, padding=5, auto_scroll=True)
@@ -50,7 +50,7 @@ class View(ft.UserControl):
         self._page.update()
 
 
-        self.btn_volume = ft.ElevatedButton(text="Calcola Volumi", on_click=self._controller.handle_volume)
+        self.btn_volume = ft.ElevatedButton(text="Calcola Volumi", on_click=self._controller.handle_volume,disabled=True)
         row2 = ft.Row([self.btn_volume],
                       alignment=ft.MainAxisAlignment.CENTER)
         self._page.controls.append(row2)
@@ -60,7 +60,7 @@ class View(ft.UserControl):
         self._page.update()
 
         self.txtN = ft.TextField(label="Lunghezza percorso")
-        self.btn_path = ft.ElevatedButton(text="Calcola percorso", on_click=self._controller.handle_path)
+        self.btn_path = ft.ElevatedButton(text="Calcola percorso", on_click=self._controller.handle_path, disabled=True)
 
         row3 = ft.Row([self.txtN, self.btn_path],
                       alignment=ft.MainAxisAlignment.CENTER)
