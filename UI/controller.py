@@ -108,12 +108,15 @@ class Controller:
 
         #chiamo ricorsione
         path,max=self._model.getCamminoOttimo(N_archi)
+        self.grafo= self._model.getGraph()
 
         self._view.txtOut3.controls.append(ft.Text(f"il percorso ottimo ha peso: {max}"))
         self._view.update_page()
 
-        for p in path: #sistema questo in base a quello che ti dice il testo
-            self._view.txtOut3.controls.append(ft.Text(p))
+        for i,nodo in enumerate(path):
+            if i<len(path)-1:
+                successore= path[i+1]
+                self._view.txtOut3.controls.append(ft.Text(f"{nodo}-->{successore}: {self.grafo[nodo][successore]['weight']}"))
         self._view.update_page()
 
 
